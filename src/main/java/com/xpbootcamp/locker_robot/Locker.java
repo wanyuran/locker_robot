@@ -13,7 +13,7 @@ public class Locker {
 	}
 
 
-	public Ticket save(Bag bag) {
+	public Ticket saveBag(Bag bag) {
 		Ticket ticket = new Ticket();
 		lockers.put(ticket, bag);
 
@@ -29,7 +29,7 @@ public class Locker {
 		return capacity;
 	}
 
-	public Bag get(Ticket ticket) {
+	public Bag getBag(Ticket ticket) {
 
 		if(lockers.containsKey(ticket)) {
 			Bag bag = lockers.get(ticket);
