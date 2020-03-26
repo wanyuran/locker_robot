@@ -17,7 +17,7 @@ public class Locker {
 		Ticket ticket = new Ticket();
 		lockers.put(ticket, bag);
 
-		if(capacity >0) {
+		if (capacity > 0) {
 			capacity = capacity - 1;
 			return ticket;
 		} else {
@@ -27,5 +27,13 @@ public class Locker {
 
 	public int getCapacity() {
 		return capacity;
+	}
+
+	public Bag get(Ticket ticket) {
+		Bag bag = lockers.get(ticket);
+		lockers.remove(ticket);
+
+		capacity += 1;
+		return bag;
 	}
 }
