@@ -106,4 +106,25 @@ class LockerTest {
 		});
         assertEquals("当前票据无效", runtimeException.getMessage());
     }
+
+	@Test
+	void should_return_no_bag_when_get_bag_given_a_locker_and_an_used_valid_ticket() {
+// Given
+		int capacity = 50;
+		Locker locker = new Locker(capacity);
+		Bag bag = new Bag();
+
+		Ticket usedTicket = locker.save(bag);
+		locker.get(usedTicket);
+
+// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
+			Bag foundBag = locker.get(usedTicket);
+// Then
+			assertEquals(capacity, locker.getCapacity());
+			assertNull(foundBag);
+		});
+		assertEquals("当前票据无效", runtimeException.getMessage());
+	}
+
 }
