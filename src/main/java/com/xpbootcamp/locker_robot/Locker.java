@@ -30,10 +30,15 @@ public class Locker {
 	}
 
 	public Bag get(Ticket ticket) {
-		Bag bag = lockers.get(ticket);
-		lockers.remove(ticket);
 
-		capacity += 1;
-		return bag;
+		if(lockers.containsKey(ticket)) {
+			Bag bag = lockers.get(ticket);
+			lockers.remove(ticket);
+			capacity += 1;
+			return bag;
+		} else {
+			throw new RuntimeException("当前票据无效");
+		}
+
 	}
 }

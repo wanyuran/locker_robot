@@ -57,7 +57,7 @@ class LockerTest {
 	}
 
 	@Test
-	void should_return_bag_and_capacity_increase_by_1_when_get_bag_given_locker_and_a_valid_ticket() {
+	void should_return_bag_and_capacity_increase_by_1_when_get_bag_given_a_locker_and_a_valid_ticket() {
 		// Given
 		int capacity = 50;
 		Locker locker = new Locker(capacity);
@@ -75,7 +75,7 @@ class LockerTest {
 	}
 
     @Test
-    void should_return_no_bag_and_capacity_increase_by_1_when_get_bag_given_locker_and_a_valid_ticket() {
+    void should_return_no_bag_and_capacity_increase_by_1_when_get_bag_given_a_locker_and_a_valid_ticket() {
         // Given
         int capacity = 50;
         Locker locker = new Locker(capacity);
@@ -90,5 +90,20 @@ class LockerTest {
         assertEquals(capacity, locker.getCapacity());
     }
 
+    @Test
+    void should_return_no_bag_when_get_bag_given_a_locker_and_an_invalid_ticket() {
+        // Given
+        int capacity = 50;
+        Locker locker = new Locker(capacity);
+        Ticket invalidTicket = new Ticket();
 
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
+			Bag foundBag = locker.get(invalidTicket);
+			// Then
+			assertEquals(capacity, locker.getCapacity());
+			assertNull(foundBag);
+		});
+        assertEquals("当前票据无效", runtimeException.getMessage());
+    }
 }
