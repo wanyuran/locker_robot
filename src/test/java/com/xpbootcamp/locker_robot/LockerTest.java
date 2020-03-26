@@ -73,4 +73,22 @@ class LockerTest {
 		assertSame(bag, foundBag);
 		assertEquals(capacity, locker.getCapacity());
 	}
+
+    @Test
+    void should_return_no_bag_and_capacity_increase_by_1_when_get_bag_given_locker_and_a_valid_ticket() {
+        // Given
+        int capacity = 50;
+        Locker locker = new Locker(capacity);
+
+        Ticket validTicket = locker.save(null);
+
+        // When
+        Bag foundBag = locker.get(validTicket);
+
+        // Then
+        assertNull(foundBag);
+        assertEquals(capacity, locker.getCapacity());
+    }
+
+
 }
