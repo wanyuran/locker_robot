@@ -53,6 +53,25 @@ class LockerTest {
 	}
 
 	@Test
+	void should_return_error_message_when_save_bag_at_twice_given_a_locker_with_capacity_is_1_and_two_bag() {
+		// Given
+		int capacity = 1;
+		Locker locker = new Locker(capacity);
+		Bag bag = new Bag();
+		Bag anotherBag = new Bag();
+
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
+			locker.saveBag(bag);
+			locker.saveBag(anotherBag);
+		});
+
+		// Then
+		assertEquals("当前柜子已满", runtimeException.getMessage());
+
+	}
+
+	@Test
 	void should_return_bag_when_get_bag_given_a_locker_with_capacity_is_0_and_a_valid_ticket() {
 		// TODO initCapacity=1与测试名会不会有歧义
 		// Given
