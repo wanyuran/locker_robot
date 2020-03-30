@@ -12,20 +12,14 @@ public class Locker {
 		this.capacity = capacity;
 	}
 
-
 	public Ticket saveBag(Bag bag) {
 		if (capacity <= 0) {
 			throw new RuntimeException("当前柜子已满");
-
 		}
 		Ticket ticket = new Ticket();
 		lockers.put(ticket, bag);
 		capacity -= 1;
 		return ticket;
-	}
-
-	public int getCapacity() {
-		return capacity;
 	}
 
 	public Bag getBag(Ticket ticket) {
