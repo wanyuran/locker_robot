@@ -12,33 +12,23 @@ public class Locker {
 		this.capacity = capacity;
 	}
 
-
 	public Ticket saveBag(Bag bag) {
-		Ticket ticket = new Ticket();
-		lockers.put(ticket, bag);
-
-		if (capacity > 0) {
-			capacity = capacity - 1;
-			return ticket;
-		} else {
+		if (capacity <= 0) {
 			throw new RuntimeException("当前柜子已满");
 		}
-	}
-
-	public int getCapacity() {
-		return capacity;
+		Ticket ticket = new Ticket();
+		lockers.put(ticket, bag);
+		capacity -= 1;
+		return ticket;
 	}
 
 	public Bag getBag(Ticket ticket) {
-
-		if(lockers.containsKey(ticket)) {
-			Bag bag = lockers.get(ticket);
-			lockers.remove(ticket);
-			capacity += 1;
-			return bag;
-		} else {
+		if (!lockers.containsKey(ticket)) {
 			throw new RuntimeException("当前票据无效");
 		}
-
+		Bag bag = lockers.get(ticket);
+		lockers.remove(ticket);
+		capacity += 1;
+		return bag;
 	}
 }
