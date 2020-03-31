@@ -24,21 +24,6 @@ class LockerTest {
         assertEquals(capacity - 1, locker.getCapacity());
     }
 
-
-    @Test
-    void should_return_ticket_and_capacity_decrease_by_1_when_save_bag_given_a_locker_and_no_bag() {
-        // Given
-        int capacity = 50;
-        Locker locker = new Locker(capacity);
-
-        // When
-        Ticket ticket = locker.saveBag(null);
-
-        // Then
-        assertNotNull(ticket);
-        assertEquals(capacity - 1, locker.getCapacity());
-    }
-
     @Test
     void should_return_no_ticket_when_save_bag_given_a_locker_with_no_capacity_and_a_bag() {
         // Given
@@ -74,21 +59,6 @@ class LockerTest {
         assertEquals(capacity, locker.getCapacity());
     }
 
-    @Test
-    void should_return_no_bag_and_capacity_increase_by_1_when_get_bag_given_a_locker_and_a_valid_ticket() {
-        // Given
-        int capacity = 50;
-        Locker locker = new Locker(capacity);
-
-        Ticket validTicket = locker.saveBag(null);
-
-        // When
-        Bag foundBag = locker.getBag(validTicket);
-
-        // Then
-        assertNull(foundBag);
-        assertEquals(capacity, locker.getCapacity());
-    }
 
     @Test
     void should_return_no_bag_when_get_bag_given_a_locker_and_an_invalid_ticket() {
