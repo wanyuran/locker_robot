@@ -18,6 +18,11 @@ public class Robot {
                 break;
             } catch (RuntimeException ignored) { }
         }
+
+        if(ticket == null) {
+            throw new RuntimeException("当前柜子已满");
+        }
+
         return ticket;
     }
 }
