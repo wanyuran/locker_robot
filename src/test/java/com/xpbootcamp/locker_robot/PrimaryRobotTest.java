@@ -102,6 +102,28 @@ class PrimaryRobotTest {
 		// Then
 		assertEquals("当前票据无效", runtimeException.getMessage());
 	}
+
+
+	@Test
+	void should_return_error_message_when_get_bag_given_a_robot_and_an_used_ticket() {
+		// Given
+		Locker locker = new Locker(1);
+		Locker antherLocker = new Locker(0);
+
+		Robot robot = new Robot(Arrays.asList(locker, antherLocker));
+
+		Bag bag = new Bag();
+		Ticket usedTicket = locker.save(bag);
+		locker.get(usedTicket);
+
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
+			robot.get(usedTicket);
+		});
+
+		// Then
+		assertEquals("当前票据无效", runtimeException.getMessage());
+	}
 }
 
 
