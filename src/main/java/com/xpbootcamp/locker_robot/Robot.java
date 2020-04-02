@@ -23,4 +23,15 @@ public class Robot {
         return ofNullable(ticket)
             .orElseThrow(() -> new RuntimeException("当前柜子已满"));
     }
+
+    public Bag get(Ticket ticket) {
+        Bag bag = null;
+        for (Locker locker: lockers) {
+            try{
+                bag = locker.get(ticket);
+                break;
+            } catch (RuntimeException ignored) { }
+        }
+        return bag;
+    }
 }

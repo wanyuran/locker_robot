@@ -63,7 +63,24 @@ class PrimaryRobotTest {
 
 		// Then
 		assertEquals("当前柜子已满", runtimeException.getMessage());
+	}
 
+	@Test
+	void should_return_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
+		// Given
+		Locker locker = new Locker(1);
+		Locker anotherLocker = new Locker(0);
+
+		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
+
+		Bag bag = new Bag();
+		Ticket invalidTicket = locker.save(bag);
+
+		// When
+		Bag foundBag = robot.get(invalidTicket);
+
+		// Then
+		assertNotNull(foundBag);
 	}
 }
 
