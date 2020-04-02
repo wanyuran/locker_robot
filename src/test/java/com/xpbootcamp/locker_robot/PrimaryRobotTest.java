@@ -81,6 +81,7 @@ class PrimaryRobotTest {
 
 		// Then
 		assertNotNull(foundBag);
+		assertEquals(bag, foundBag);
 	}
 }
 
