@@ -2,6 +2,8 @@ package com.xpbootcamp.locker_robot;
 
 import java.util.List;
 
+import static java.util.Optional.ofNullable;
+
 public class Robot {
 
     private List<Locker> lockers;
@@ -18,11 +20,7 @@ public class Robot {
                 break;
             } catch (RuntimeException ignored) { }
         }
-
-        if(ticket == null) {
-            throw new RuntimeException("当前柜子已满");
-        }
-
-        return ticket;
+        return ofNullable(ticket)
+            .orElseThrow(() -> new RuntimeException("当前柜子已满"));
     }
 }
