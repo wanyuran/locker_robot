@@ -16,8 +16,7 @@ public class Robot {
             try{
                 ticket = locker.save(bag);
                 break;
-            } catch (RuntimeException ignored) {
-            }
+            } catch (RuntimeException ignored) { }
         }
         return ticket;
     }
