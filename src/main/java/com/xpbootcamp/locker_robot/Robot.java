@@ -32,6 +32,7 @@ public class Robot {
                 break;
             } catch (RuntimeException ignored) { }
         }
-        return bag;
+        return ofNullable(bag)
+                .orElseThrow(() -> new RuntimeException("当前票据无效"));
     }
 }

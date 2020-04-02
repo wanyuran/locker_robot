@@ -74,14 +74,33 @@ class PrimaryRobotTest {
 		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
 
 		Bag bag = new Bag();
-		Ticket invalidTicket = locker.save(bag);
+		Ticket validTicket = locker.save(bag);
 
 		// When
-		Bag foundBag = robot.get(invalidTicket);
+		Bag foundBag = robot.get(validTicket);
 
 		// Then
 		assertNotNull(foundBag);
 		assertEquals(bag, foundBag);
+	}
+
+	@Test
+	void should_return_error_message_when_get_bag_given_a_robot_and_an_invalid_ticket() {
+		// Given
+		Locker locker = new Locker(0);
+		Locker antherLocker = new Locker(0);
+
+		Robot robot = new Robot(Arrays.asList(locker, antherLocker));
+
+		Ticket invalidTicket = new Ticket();
+
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
+			robot.get(invalidTicket);
+		});
+
+		// Then
+		assertEquals("当前票据无效", runtimeException.getMessage());
 	}
 }
 
