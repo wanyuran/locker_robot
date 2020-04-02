@@ -17,7 +17,7 @@ class LockerTest {
 		Bag bag = new Bag();
 
 		// When
-		Ticket ticket = locker.saveBag(bag);
+		Ticket ticket = locker.save(bag);
 
 		// Then
 		assertNotNull(ticket);
@@ -32,7 +32,7 @@ class LockerTest {
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class,
-			() -> locker.saveBag(bag));
+			() -> locker.save(bag));
 
 		// Then
 		assertEquals("当前柜子已满", runtimeException.getMessage());
@@ -48,8 +48,8 @@ class LockerTest {
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			locker.saveBag(bag);
-			locker.saveBag(anotherBag);
+			locker.save(bag);
+			locker.save(anotherBag);
 		});
 
 		// Then
@@ -65,10 +65,10 @@ class LockerTest {
 		Locker locker = new Locker(initCapacity);
 		Bag bag = new Bag();
 
-		Ticket validTicket = locker.saveBag(bag);
+		Ticket validTicket = locker.save(bag);
 
 		// When
-		Bag foundBag = locker.getBag(validTicket);
+		Bag foundBag = locker.get(validTicket);
 
 		// Then
 		assertNotNull(foundBag);
@@ -85,7 +85,7 @@ class LockerTest {
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			locker.getBag(invalidTicket);
+			locker.get(invalidTicket);
 		});
 
 		// Then
@@ -99,12 +99,12 @@ class LockerTest {
 		Locker locker = new Locker(initCapacity);
 		Bag bag = new Bag();
 
-		Ticket usedTicket = locker.saveBag(bag);
-		locker.getBag(usedTicket);
+		Ticket usedTicket = locker.save(bag);
+		locker.get(usedTicket);
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			locker.getBag(usedTicket);
+			locker.get(usedTicket);
 		});
 
 		// Then
@@ -117,11 +117,11 @@ class LockerTest {
 		int initCapacity = 1;
 		Locker locker = new Locker(initCapacity);
 		Bag bag = new Bag();
-		Ticket ticket = locker.saveBag(bag);
+		Ticket ticket = locker.save(bag);
 
 		// When
-		locker.getBag(ticket);
-		Ticket anotherTicket = locker.saveBag(bag);
+		locker.get(ticket);
+		Ticket anotherTicket = locker.save(bag);
 
 		// Then
 		assertNotNull(anotherTicket);
