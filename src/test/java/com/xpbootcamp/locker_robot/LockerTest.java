@@ -111,5 +111,21 @@ class LockerTest {
 		assertEquals("当前票据无效", runtimeException.getMessage());
 	}
 
+	@Test
+	void should_return_ticket_when_save_bag_after_get_bag_given_a_locker_with_capacity_is_full_and_a_valid_ticket() {
+		// Given
+		int initCapacity = 1;
+		Locker locker = new Locker(initCapacity);
+		Bag bag = new Bag();
+		Ticket ticket = locker.saveBag(bag);
+
+		// When
+		locker.getBag(ticket);
+		Ticket anotherTicket = locker.saveBag(bag);
+
+		// Then
+		assertNotNull(anotherTicket);
+	}
+
 }
 
