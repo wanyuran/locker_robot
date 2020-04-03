@@ -15,13 +15,16 @@ public class Robot {
     public Ticket save(Bag bag) {
         Ticket ticket = null;
         for (Locker locker: lockers) {
-            try{
+            try {
                 ticket = locker.save(bag);
                 break;
-            } catch (RuntimeException ignored) { }
+            } catch (RuntimeException e) {
+                if(locker == lockers.get(lockers.size()-1)) {
+                    throw e;
+                }
+            }
         }
-        return ofNullable(ticket)
-            .orElseThrow(() -> new RuntimeException("当前柜子已满"));
+        return ticket;
     }
 
     public Bag get(Ticket ticket) {
@@ -30,7 +33,11 @@ public class Robot {
             try{
                 bag = locker.get(ticket);
                 break;
-            } catch (RuntimeException ignored) { }
+            } catch (RuntimeException e) {
+                if(locker == lockers.get(lockers.size()-1)) {
+                    throw e;
+                }
+            }
         }
         return ofNullable(bag)
                 .orElseThrow(() -> new RuntimeException("当前票据无效"));

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Locker {
 	private int capacity;
-	private Map<Ticket, Bag> lockers = new HashMap<>();
+	private Map<Ticket, Bag> savedBag = new HashMap<>();
 
 	public Locker(int capacity) {
 		this.capacity = capacity;
@@ -17,17 +17,17 @@ public class Locker {
 			throw new RuntimeException("当前柜子已满");
 		}
 		Ticket ticket = new Ticket();
-		lockers.put(ticket, bag);
+		savedBag.put(ticket, bag);
 		capacity -= 1;
 		return ticket;
 	}
 
 	public Bag get(Ticket ticket) {
-		if (!lockers.containsKey(ticket)) {
+		if (!savedBag.containsKey(ticket)) {
 			throw new RuntimeException("当前票据无效");
 		}
-		Bag bag = lockers.get(ticket);
-		lockers.remove(ticket);
+		Bag bag = savedBag.get(ticket);
+		savedBag.remove(ticket);
 		capacity += 1;
 		return bag;
 	}
