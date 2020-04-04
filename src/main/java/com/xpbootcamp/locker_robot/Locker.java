@@ -12,7 +12,7 @@ public class Locker {
 		this.capacity = capacity;
 	}
 
-	public Ticket save(Bag bag) {
+	public Ticket saveBag(Bag bag) {
 		if (capacity <= 0) {
 			throw new RuntimeException("当前柜子已满");
 		}
@@ -22,7 +22,7 @@ public class Locker {
 		return ticket;
 	}
 
-	public Bag get(Ticket ticket) {
+	public Bag getBag(Ticket ticket) {
 		if (!savedBag.containsKey(ticket)) {
 			throw new RuntimeException("当前票据无效");
 		}

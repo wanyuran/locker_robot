@@ -10,20 +10,20 @@ public class Robot {
 		this.lockers = lockers;
 	}
 
-	public Ticket save(Bag bag) {
+	public Ticket saveBag(Bag bag) {
 		for (Locker locker : lockers) {
 			try {
-				return locker.save(bag);
+				return locker.saveBag(bag);
 			} catch (RuntimeException ignored) {
 			}
 		}
 		throw new RuntimeException("当前柜子已满");
 	}
 
-	public Bag get(Ticket ticket) {
+	public Bag getBag(Ticket ticket) {
 		for (Locker locker : lockers) {
 			try {
-				return locker.get(ticket);
+				return locker.getBag(ticket);
 			} catch (RuntimeException ignored) {
 			}
 		}

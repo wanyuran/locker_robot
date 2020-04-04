@@ -19,11 +19,11 @@ class PrimaryRobotTest {
 		Bag bag = new Bag();
 
 		// When
-		Ticket ticket = robot.save(bag);
+		Ticket ticket = robot.saveBag(bag);
 
 		// Then
 		assertNotNull(ticket);
-		Bag foundBag = locker.get(ticket);
+		Bag foundBag = locker.getBag(ticket);
 		assertEquals(bag, foundBag);
 	}
 
@@ -38,11 +38,11 @@ class PrimaryRobotTest {
 		Bag bag = new Bag();
 
 		// When
-		Ticket ticket = robot.save(bag);
+		Ticket ticket = robot.saveBag(bag);
 
 		// Then
 		assertNotNull(ticket);
-		Bag foundBag = anotherLocker.get(ticket);
+		Bag foundBag = anotherLocker.getBag(ticket);
 		assertEquals(bag, foundBag);
 	}
 
@@ -58,7 +58,7 @@ class PrimaryRobotTest {
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			robot.save(bag);
+			robot.saveBag(bag);
 		});
 
 		// Then
@@ -74,10 +74,10 @@ class PrimaryRobotTest {
 		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
 
 		Bag bag = new Bag();
-		Ticket validTicket = locker.save(bag);
+		Ticket validTicket = locker.saveBag(bag);
 
 		// When
-		Bag foundBag = robot.get(validTicket);
+		Bag foundBag = robot.getBag(validTicket);
 
 		// Then
 		assertNotNull(foundBag);
@@ -96,7 +96,7 @@ class PrimaryRobotTest {
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			robot.get(invalidTicket);
+			robot.getBag(invalidTicket);
 		});
 
 		// Then
@@ -113,12 +113,12 @@ class PrimaryRobotTest {
 		Robot robot = new Robot(Arrays.asList(locker, antherLocker));
 
 		Bag bag = new Bag();
-		Ticket usedTicket = locker.save(bag);
-		locker.get(usedTicket);
+		Ticket usedTicket = locker.saveBag(bag);
+		locker.getBag(usedTicket);
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			robot.get(usedTicket);
+			robot.getBag(usedTicket);
 		});
 
 		// Then
