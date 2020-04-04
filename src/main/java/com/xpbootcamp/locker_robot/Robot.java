@@ -2,43 +2,31 @@ package com.xpbootcamp.locker_robot;
 
 import java.util.List;
 
-import static java.util.Optional.ofNullable;
-
 public class Robot {
 
-    private List<Locker> lockers;
+	private List<Locker> lockers;
 
-    public Robot(List<Locker> lockers) {
-        this.lockers = lockers;
-    }
+	public Robot(List<Locker> lockers) {
+		this.lockers = lockers;
+	}
 
-    public Ticket save(Bag bag) {
-        Ticket ticket = null;
-        for (Locker locker: lockers) {
-            try {
-                ticket = locker.save(bag);
-                break;
-            } catch (RuntimeException e) {
-                if(locker == lockers.get(lockers.size()-1)) {
-                    throw e;
-                }
-            }
-        }
-        return ticket;
-    }
+	public Ticket save(Bag bag) {
+		for (Locker locker : lockers) {
+			try {
+				return locker.save(bag);
+			} catch (RuntimeException ignored) {
+			}
+		}
+		throw new RuntimeException("当前柜子已满");
+	}
 
-    public Bag get(Ticket ticket) {
-        Bag bag = null;
-        for (Locker locker: lockers) {
-            try{
-                bag = locker.get(ticket);
-                break;
-            } catch (RuntimeException e) {
-                if(locker == lockers.get(lockers.size()-1)) {
-                    throw e;
-                }
-            }
-        }
-        return bag;
-    }
+	public Bag get(Ticket ticket) {
+		for (Locker locker : lockers) {
+			try {
+				return locker.get(ticket);
+			} catch (RuntimeException ignored) {
+			}
+		}
+		throw new RuntimeException("当前票据无效");
+	}
 }
