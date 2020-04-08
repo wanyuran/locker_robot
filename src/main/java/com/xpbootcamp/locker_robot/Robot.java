@@ -17,7 +17,7 @@ public class Robot {
 			} catch (RuntimeException ignored) {
 			}
 		}
-		throw new RuntimeException("当前柜子已满");
+		throw new RuntimeException("所有柜子已满");
 	}
 
 	public Bag getBag(Ticket ticket) {
