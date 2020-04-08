@@ -5,20 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Locker {
-	private int capacity;
+	private int availableCapacity;
 	private Map<Ticket, Bag> savedBag = new HashMap<>();
 
-	public Locker(int capacity) {
-		this.capacity = capacity;
+	public Locker(int availableCapacity) {
+		this.availableCapacity = availableCapacity;
 	}
 
 	public Ticket saveBag(Bag bag) {
-		if (capacity <= 0) {
+		if (availableCapacity <= 0) {
 			throw new RuntimeException("当前柜子已满");
 		}
 		Ticket ticket = new Ticket();
 		savedBag.put(ticket, bag);
-		capacity -= 1;
+		availableCapacity -= 1;
 		return ticket;
 	}
 
@@ -28,7 +28,11 @@ public class Locker {
 		}
 		Bag bag = savedBag.get(ticket);
 		savedBag.remove(ticket);
-		capacity += 1;
+		availableCapacity += 1;
 		return bag;
+	}
+
+	public Integer getAvailableCapacity() {
+		return availableCapacity;
 	}
 }

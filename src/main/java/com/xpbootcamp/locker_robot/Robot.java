@@ -1,5 +1,6 @@
 package com.xpbootcamp.locker_robot;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Robot {
@@ -11,13 +12,11 @@ public class Robot {
 	}
 
 	public Ticket saveBag(Bag bag) {
-		for (Locker locker : lockers) {
-			try {
-				return locker.saveBag(bag);
-			} catch (RuntimeException ignored) {
-			}
-		}
-		throw new RuntimeException("所有柜子已满");
+		Locker foundLocker = lockers.stream()
+				.max(Comparator.comparingInt(Locker::getAvailableCapacity))
+				.orElseThrow(() -> new RuntimeException("没有柜子"));
+
+		return foundLocker.saveBag(bag);
 	}
 
 	public Bag getBag(Ticket ticket) {
