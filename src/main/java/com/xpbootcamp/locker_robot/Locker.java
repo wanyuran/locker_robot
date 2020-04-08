@@ -32,7 +32,7 @@ public class Locker {
 		return bag;
 	}
 
-	public Integer getAvailableCapacity() {
+	Integer getAvailableCapacity() {
 		return availableCapacity;
 	}
 }

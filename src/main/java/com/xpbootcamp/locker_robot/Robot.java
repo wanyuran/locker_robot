@@ -13,8 +13,8 @@ public class Robot {
 
 	public Ticket saveBag(Bag bag) {
 		Locker foundLocker = lockers.stream()
-				.max(Comparator.comparingInt(Locker::getAvailableCapacity))
-				.orElseThrow(() -> new RuntimeException("没有柜子"));
+			.max(Comparator.comparingInt(Locker::getAvailableCapacity))
+			.orElseThrow(() -> new RuntimeException("没有柜子"));
 
 		return foundLocker.saveBag(bag);
 	}
