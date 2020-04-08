@@ -2,6 +2,7 @@ package com.xpbootcamp.locker_robot;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Robot {
 
@@ -20,12 +21,15 @@ public class Robot {
 	}
 
 	public Bag getBag(Ticket ticket) {
-		for (Locker locker : lockers) {
+
+		return lockers.stream().map(locker -> {
 			try {
 				return locker.getBag(ticket);
-			} catch (RuntimeException ignored) {
+			} catch (Exception e) {
+				return null;
 			}
-		}
-		throw new RuntimeException("当前票据无效");
+		}).filter(Objects::nonNull)
+			.findFirst()
+			.orElseThrow(() -> new RuntimeException("当前票据无效"));
 	}
 }

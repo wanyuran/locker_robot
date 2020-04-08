@@ -21,7 +21,7 @@ class SmartRobotTest {
 		// Then
 		assertNotNull(ticket);
 		Bag foundBag = locker.getBag(ticket);
-		assertEquals(bag, foundBag);
+		assertSame(bag, foundBag);
 	}
 
 	@Test
@@ -38,7 +38,7 @@ class SmartRobotTest {
 		// Then
 		assertNotNull(ticket);
 		Bag foundBag = anotherLocker.getBag(ticket);
-		assertEquals(bag, foundBag);
+		assertSame(bag, foundBag);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ class SmartRobotTest {
 		// Then
 		assertNotNull(ticket);
 		Bag foundBag = locker.getBag(ticket);
-		assertEquals(bag, foundBag);
+		assertSame(bag, foundBag);
 	}
 
 	@Test
@@ -74,5 +74,23 @@ class SmartRobotTest {
 
 		// Then
 		assertEquals("当前柜子已满", runtimeException.getMessage());
+	}
+
+	@Test
+	void should_return_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
+		// Given
+		Locker locker = new Locker(1);
+		Locker anotherLocker = new Locker(0);
+
+		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
+
+		Ticket validTicket = smartRobot.saveBag(bag);
+
+		// When
+		Bag foundBag = smartRobot.getBag(validTicket);
+
+		// Then
+		assertSame(bag, foundBag);
 	}
 }
