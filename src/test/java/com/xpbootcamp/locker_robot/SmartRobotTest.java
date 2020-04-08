@@ -93,4 +93,21 @@ class SmartRobotTest {
 		// Then
 		assertSame(bag, foundBag);
 	}
+
+	@Test
+	void should_return_error_message_when_get_bag_given_a_robot_and_an_invalid_ticket() {
+		// Given
+		Locker locker = new Locker(0);
+		Locker anotherLocker = new Locker(0);
+
+		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		Ticket invalidTicket = new Ticket();
+
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class,
+				() -> smartRobot.getBag(invalidTicket));
+
+		// Then
+		assertEquals("当前票据无效", runtimeException.getMessage());
+	}
 }
