@@ -42,4 +42,21 @@ class SmartRobotTest {
 		assertEquals(bag, foundBag);
 	}
 
+	@Test
+	void should_return_a_ticket_from_locker_when_save_bag_given_a_robot_and_a_bag_and_same_capacity_lockers() {
+		// Given
+		Locker locker = new Locker(1);
+		Locker anotherLocker = new Locker(1);
+
+		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
+
+		// When
+		Ticket ticket = smartRobot.saveBag(bag);
+
+		// Then
+		assertNotNull(ticket);
+		Bag foundBag = locker.getBag(ticket);
+		assertEquals(bag, foundBag);
+	}
 }
