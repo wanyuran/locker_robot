@@ -4,11 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class Robot {
+public class SmartRobot {
 
 	private List<Locker> lockers;
 
-	public Robot(List<Locker> lockers) {
+	public SmartRobot(List<Locker> lockers) {
 		this.lockers = lockers;
 	}
 

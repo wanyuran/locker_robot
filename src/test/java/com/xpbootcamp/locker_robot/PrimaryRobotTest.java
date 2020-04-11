@@ -15,11 +15,11 @@ class PrimaryRobotTest {
 		// Given
 		Locker locker = new Locker(1);
 		Locker anotherLocker = new Locker(1);
-		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
+		PrimaryRobot primaryRobot = new PrimaryRobot(Arrays.asList(locker, anotherLocker));
 		Bag bag = new Bag();
 
 		// When
-		Ticket ticket = robot.saveBag(bag);
+		Ticket ticket = primaryRobot.saveBag(bag);
 
 		// Then
 		assertNotNull(ticket);
@@ -33,12 +33,12 @@ class PrimaryRobotTest {
 		Locker locker = new Locker(0);
 		Locker anotherLocker = new Locker(1);
 
-		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
+		PrimaryRobot primaryRobot = new PrimaryRobot(Arrays.asList(locker, anotherLocker));
 
 		Bag bag = new Bag();
 
 		// When
-		Ticket ticket = robot.saveBag(bag);
+		Ticket ticket = primaryRobot.saveBag(bag);
 
 		// Then
 		assertNotNull(ticket);
@@ -52,13 +52,13 @@ class PrimaryRobotTest {
 		Locker locker = new Locker(0);
 		Locker anotherLocker = new Locker(0);
 
-		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
+		PrimaryRobot primaryRobot = new PrimaryRobot(Arrays.asList(locker, anotherLocker));
 
 		Bag bag = new Bag();
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			robot.saveBag(bag);
+			primaryRobot.saveBag(bag);
 		});
 
 		// Then
@@ -71,13 +71,13 @@ class PrimaryRobotTest {
 		Locker locker = new Locker(1);
 		Locker anotherLocker = new Locker(0);
 
-		Robot robot = new Robot(Arrays.asList(locker, anotherLocker));
+		PrimaryRobot primaryRobot = new PrimaryRobot(Arrays.asList(locker, anotherLocker));
 
 		Bag bag = new Bag();
 		Ticket validTicket = locker.saveBag(bag);
 
 		// When
-		Bag foundBag = robot.getBag(validTicket);
+		Bag foundBag = primaryRobot.getBag(validTicket);
 
 		// Then
 		assertNotNull(foundBag);
@@ -90,13 +90,13 @@ class PrimaryRobotTest {
 		Locker locker = new Locker(0);
 		Locker antherLocker = new Locker(0);
 
-		Robot robot = new Robot(Arrays.asList(locker, antherLocker));
+		PrimaryRobot primaryRobot = new PrimaryRobot(Arrays.asList(locker, antherLocker));
 
 		Ticket invalidTicket = new Ticket();
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			robot.getBag(invalidTicket);
+			primaryRobot.getBag(invalidTicket);
 		});
 
 		// Then
@@ -110,7 +110,7 @@ class PrimaryRobotTest {
 		Locker locker = new Locker(1);
 		Locker antherLocker = new Locker(0);
 
-		Robot robot = new Robot(Arrays.asList(locker, antherLocker));
+		PrimaryRobot primaryRobot = new PrimaryRobot(Arrays.asList(locker, antherLocker));
 
 		Bag bag = new Bag();
 		Ticket usedTicket = locker.saveBag(bag);
@@ -118,7 +118,7 @@ class PrimaryRobotTest {
 
 		// When
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-			robot.getBag(usedTicket);
+			primaryRobot.getBag(usedTicket);
 		});
 
 		// Then

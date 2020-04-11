@@ -13,7 +13,7 @@ class SmartRobotTest {
 		// Given
 		Locker locker = new Locker(2);
 		Locker anotherLocker = new Locker(1);
-		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
 		Bag bag = new Bag();
 
 		// When
@@ -30,7 +30,7 @@ class SmartRobotTest {
 		// Given
 		Locker locker = new Locker(1);
 		Locker anotherLocker = new Locker(2);
-		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
 		Bag bag = new Bag();
 
 		// When
@@ -48,7 +48,7 @@ class SmartRobotTest {
 		Locker locker = new Locker(1);
 		Locker anotherLocker = new Locker(1);
 
-		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
 		Bag bag = new Bag();
 
 		// When
@@ -66,7 +66,7 @@ class SmartRobotTest {
 		Locker locker = new Locker(0);
 		Locker anotherLocker = new Locker(0);
 
-		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
 		Bag bag = new Bag();
 
 		// When
@@ -83,7 +83,7 @@ class SmartRobotTest {
 		Locker locker = new Locker(1);
 		Locker anotherLocker = new Locker(0);
 
-		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
 		Bag bag = new Bag();
 
 		Ticket validTicket = smartRobot.saveBag(bag);
@@ -101,7 +101,7 @@ class SmartRobotTest {
 		Locker locker = new Locker(0);
 		Locker anotherLocker = new Locker(0);
 
-		Robot smartRobot = new Robot(Arrays.asList(locker, anotherLocker));
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
 		Ticket invalidTicket = new Ticket();
 
 		// When
@@ -116,7 +116,7 @@ class SmartRobotTest {
 	void should_return_null_when_get_bag_given_a_null_bag() {
 		// Given
 		Locker locker = new Locker(1);
-		Robot smartRobot = new Robot(Collections.singletonList(locker));
+		SmartRobot smartRobot = new SmartRobot(Collections.singletonList(locker));
 
 		// When
 		Ticket ticket = smartRobot.saveBag(null);
