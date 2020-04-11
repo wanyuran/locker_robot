@@ -3,6 +3,7 @@ package com.xpbootcamp.locker_robot;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -109,5 +110,19 @@ class SmartRobotTest {
 
 		// Then
 		assertEquals("当前票据无效", runtimeException.getMessage());
+	}
+
+	@Test
+	void should_return_null_when_get_bag_given_a_null_bag() {
+		// Given
+		Locker locker = new Locker(1);
+		Robot smartRobot = new Robot(Collections.singletonList(locker));
+
+		// When
+		Ticket ticket = smartRobot.saveBag(null);
+		Bag foundBag = smartRobot.getBag(ticket);
+
+		// Then
+		assertNull(foundBag);
 	}
 }

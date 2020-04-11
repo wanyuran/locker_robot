@@ -21,15 +21,12 @@ public class Robot {
 	}
 
 	public Bag getBag(Ticket ticket) {
-
-		return lockers.stream().map(locker -> {
+		for (Locker locker : lockers) {
 			try {
 				return locker.getBag(ticket);
-			} catch (Exception e) {
-				return null;
+			} catch (RuntimeException ignored) {
 			}
-		}).filter(Objects::nonNull)
-			.findFirst()
-			.orElseThrow(() -> new RuntimeException("当前票据无效"));
+		}
+		throw new RuntimeException("当前票据无效");
 	}
 }
