@@ -78,6 +78,25 @@ class SmartRobotTest {
 	}
 
 	@Test
+	void should_return_a_ticket_from_locker_when_save_bag_given_a_robot_and_no_bag() {
+		// Given
+		Locker locker = new Locker(1);
+		Locker anotherLocker = new Locker(0);
+
+		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
+
+		// When
+		Ticket ticket = smartRobot.saveBag(bag);
+
+		// Then
+		assertNotNull(ticket);
+		Bag foundBag = locker.getBag(ticket);
+		assertSame(bag, foundBag);
+	}
+
+
+	@Test
 	void should_return_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
 		// Given
 		Locker locker = new Locker(1);
@@ -113,16 +132,20 @@ class SmartRobotTest {
 	}
 
 	@Test
-	void should_return_null_when_get_bag_given_a_null_bag() {
+	void should_return_no_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
 		// Given
 		Locker locker = new Locker(1);
 		SmartRobot smartRobot = new SmartRobot(Collections.singletonList(locker));
+		Ticket ticket = smartRobot.saveBag(null);
 
 		// When
-		Ticket ticket = smartRobot.saveBag(null);
 		Bag foundBag = smartRobot.getBag(ticket);
 
 		// Then
 		assertNull(foundBag);
 	}
+
+
+
+
 }
