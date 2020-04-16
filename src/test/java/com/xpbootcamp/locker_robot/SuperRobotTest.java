@@ -11,85 +11,100 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class SuperRobotTest {
-    @Test
-    void should_return_a_ticket_from_another_locker_when_save_bag_given_a_robot_and_a_bag() {
-        // Given
-        Locker locker = new Locker(1, 2);
-        Locker anotherLocker = new Locker(1, 1);
-        SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
-        Bag bag = new Bag();
+	@Test
+	void should_return_a_ticket_from_another_locker_when_save_bag_given_a_robot_and_a_bag() {
+		// Given
+		Locker locker = new Locker(1, 2);
+		Locker anotherLocker = new Locker(1, 1);
+		SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
 
-        // When
-        Ticket ticket = superRobot.saveBag(bag);
+		// When
+		Ticket ticket = superRobot.saveBag(bag);
 
-        // Then
-        assertNotNull(ticket);
-        Bag foundBag = anotherLocker.getBag(ticket);
-        assertSame(bag, foundBag);
-    }
+		// Then
+		assertNotNull(ticket);
+		Bag foundBag = anotherLocker.getBag(ticket);
+		assertSame(bag, foundBag);
+	}
 
-    @Test
-    void should_return_a_ticket_from_locker_when_save_bag_given_a_robot_and_a_bag() {
-        // Given
-        Locker locker = new Locker(1, 1);
-        Locker anotherLocker = new Locker(1, 2);
-        SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
-        Bag bag = new Bag();
+	@Test
+	void should_return_a_ticket_from_locker_when_save_bag_given_a_robot_and_a_bag() {
+		// Given
+		Locker locker = new Locker(1, 1);
+		Locker anotherLocker = new Locker(1, 2);
+		SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
 
-        // When
-        Ticket ticket = superRobot.saveBag(bag);
+		// When
+		Ticket ticket = superRobot.saveBag(bag);
 
-        // Then
-        assertNotNull(ticket);
-        Bag foundBag = locker.getBag(ticket);
-        assertSame(bag, foundBag);
-    }
+		// Then
+		assertNotNull(ticket);
+		Bag foundBag = locker.getBag(ticket);
+		assertSame(bag, foundBag);
+	}
 
-    @Test
-    void should_return_a_ticket_from_locker_when_save_bag_given_a_robot_and_a_bag_and_same_vacancy_rate_lockers() {
-        // Given
-        Locker locker = new Locker(1, 2);
-        Locker anotherLocker = new Locker(1, 2);
-        SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
-        Bag bag = new Bag();
+	@Test
+	void should_return_a_ticket_from_locker_when_save_bag_given_a_robot_and_a_bag_and_same_vacancy_rate_lockers() {
+		// Given
+		Locker locker = new Locker(1, 2);
+		Locker anotherLocker = new Locker(1, 2);
+		SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
 
-        // When
-        Ticket ticket = superRobot.saveBag(bag);
+		// When
+		Ticket ticket = superRobot.saveBag(bag);
 
-        // Then
-        assertNotNull(ticket);
-        Bag foundBag = locker.getBag(ticket);
-        assertSame(bag, foundBag);
-    }
+		// Then
+		assertNotNull(ticket);
+		Bag foundBag = locker.getBag(ticket);
+		assertSame(bag, foundBag);
+	}
 
-    @Test
-    void should_return_error_message_when_save_bag_given_a_robot_and_a_bag_and_fulled_lockers() {
-        // Given
-        Locker locker = new Locker(0, 1);
-        Locker anotherLocker = new Locker(0, 1);
-        SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
-        Bag bag = new Bag();
+	@Test
+	void should_return_error_message_when_save_bag_given_a_robot_and_a_bag_and_fulled_lockers() {
+		// Given
+		Locker locker = new Locker(0, 1);
+		Locker anotherLocker = new Locker(0, 1);
+		SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
 
-        // When
-        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> superRobot.saveBag(bag));
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> superRobot.saveBag(bag));
 
-        // Then
-        assertEquals("所有柜子已满", runtimeException.getMessage());
-    }
+		// Then
+		assertEquals("所有柜子已满", runtimeException.getMessage());
+	}
 
-    @Test
-    void should_return_a_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
-        // Given
-        Locker locker = new Locker(1, 1);
-        Locker anotherLocker = new Locker(0, 1);
-        SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
-        Bag bag = new Bag();
-        Ticket validTicket = superRobot.saveBag(bag);
+	@Test
+	void should_return_a_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
+		// Given
+		Locker locker = new Locker(1, 1);
+		Locker anotherLocker = new Locker(0, 1);
+		SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+		Bag bag = new Bag();
+		Ticket validTicket = superRobot.saveBag(bag);
 
-        // When
-        Bag foundBag = superRobot.getBag(validTicket);
+		// When
+		Bag foundBag = superRobot.getBag(validTicket);
 
-        // Then
-        assertSame(bag, foundBag);
-    }
+		// Then
+		assertSame(bag, foundBag);
+	}
+
+	@Test
+	void should_return_error_message_when_get_bag_given_a_robot_and_a_invalid_ticket() {
+		// Given
+		Locker locker = new Locker(1, 1);
+		Locker anotherLocker = new Locker(0, 1);
+		SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+		Ticket invalidTicket = new Ticket();
+
+		// When
+		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> superRobot.getBag(invalidTicket));
+
+		// Then
+		assertEquals("当前票据无效", runtimeException.getMessage());
+	}
 }
