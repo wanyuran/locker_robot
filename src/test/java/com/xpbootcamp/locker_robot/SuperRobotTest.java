@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 
-public class SuperRobotTest {
+class SuperRobotTest {
     @Test
     void should_return_a_ticket_from_another_locker_when_save_bag_given_a_robot_and_a_bag() {
         // Given

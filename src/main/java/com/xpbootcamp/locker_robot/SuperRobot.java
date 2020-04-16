@@ -3,27 +3,26 @@ package com.xpbootcamp.locker_robot;
 import java.util.List;
 
 public class SuperRobot {
-    private final List<Locker> lockers;
+	private final List<Locker> lockers;
 
-    public SuperRobot(List<Locker> lockers) {
-        this.lockers = lockers;
-    }
+	public SuperRobot(List<Locker> lockers) {
+		this.lockers = lockers;
+	}
 
-    public Ticket saveBag(Bag bag) {
-        float maxVacancyRate = 0;
-        Locker tempLocker = null ;
-        for (Locker locker: lockers) {
-            float vacancyRate = (float) locker.getAvailableCapacity().intValue() / locker.getTotalCapacity().intValue();
-            if (vacancyRate >= maxVacancyRate) {
-                maxVacancyRate = vacancyRate;
-                tempLocker = locker;
-            }
-        }
+	public Ticket saveBag(Bag bag) {
+		float maxVacancyRate = 0;
+		Locker lockerWithMaxVacancyRate = null;
+		for (Locker locker : lockers) {
+			float vacancyRate = locker.getAvailableCapacity().floatValue() / locker.getTotalCapacity();
+			if (vacancyRate >= maxVacancyRate) {
+				lockerWithMaxVacancyRate = locker;
+			}
+		}
 
-        if (tempLocker == null) {
-            throw new RuntimeException("当前没有柜子");
-        }
+		if (lockerWithMaxVacancyRate == null) {
+			throw new RuntimeException("当前没有柜子");
+		}
 
-        return tempLocker.saveBag(bag);
-    }
+		return lockerWithMaxVacancyRate.saveBag(bag);
+	}
 }
