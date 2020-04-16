@@ -10,18 +10,23 @@ public class SuperRobot {
 	}
 
 	public Ticket saveBag(Bag bag) {
-		float maxVacancyRate = 0;
+		if (lockers == null || lockers.isEmpty()) {
+		    throw new RuntimeException("当前没有柜子");
+        }
+
+	    float maxVacancyRate = 0;
 		Locker lockerWithMaxVacancyRate = null;
+
 		for (Locker locker : lockers) {
 			float vacancyRate = locker.getAvailableCapacity().floatValue() / locker.getTotalCapacity();
-			if (vacancyRate >= maxVacancyRate) {
+			if (vacancyRate > maxVacancyRate) {
 				maxVacancyRate = vacancyRate;
 				lockerWithMaxVacancyRate = locker;
 			}
 		}
 
 		if (lockerWithMaxVacancyRate == null) {
-			throw new RuntimeException("当前没有柜子");
+			throw new RuntimeException("所有柜子已满");
 		}
 
 		return lockerWithMaxVacancyRate.saveBag(bag);
