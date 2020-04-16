@@ -84,15 +84,14 @@ class SmartRobotTest {
 		Locker anotherLocker = new Locker(0);
 
 		SmartRobot smartRobot = new SmartRobot(Arrays.asList(locker, anotherLocker));
-		Bag bag = new Bag();
 
 		// When
-		Ticket ticket = smartRobot.saveBag(bag);
+		Ticket ticket = smartRobot.saveBag(null);
 
 		// Then
 		assertNotNull(ticket);
 		Bag foundBag = locker.getBag(ticket);
-		assertSame(bag, foundBag);
+		assertNull(foundBag);
 	}
 
 
@@ -144,8 +143,5 @@ class SmartRobotTest {
 		// Then
 		assertNull(foundBag);
 	}
-
-
-
 
 }
