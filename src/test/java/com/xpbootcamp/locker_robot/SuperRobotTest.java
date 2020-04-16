@@ -76,4 +76,20 @@ class SuperRobotTest {
         // Then
         assertEquals("所有柜子已满", runtimeException.getMessage());
     }
+
+    @Test
+    void should_return_a_bag_when_get_bag_given_a_robot_and_a_valid_ticket() {
+        // Given
+        Locker locker = new Locker(1, 1);
+        Locker anotherLocker = new Locker(0, 1);
+        SuperRobot superRobot = new SuperRobot(Arrays.asList(locker, anotherLocker));
+        Bag bag = new Bag();
+        Ticket validTicket = superRobot.saveBag(bag);
+
+        // When
+        Bag foundBag = superRobot.getBag(validTicket);
+
+        // Then
+        assertSame(bag, foundBag);
+    }
 }
