@@ -6,10 +6,16 @@ import java.util.Map;
 
 public class Locker {
 	private int availableCapacity;
+	private int totalCapacity;
 	private Map<Ticket, Bag> savedBag = new HashMap<>();
 
 	public Locker(int availableCapacity) {
 		this.availableCapacity = availableCapacity;
+	}
+
+	public Locker(int availableCapacity, int totalCapacity) {
+		this.availableCapacity = availableCapacity;
+		this.totalCapacity = totalCapacity;
 	}
 
 	public Ticket saveBag(Bag bag) {
@@ -34,5 +40,9 @@ public class Locker {
 
 	Integer getAvailableCapacity() {
 		return availableCapacity;
+	}
+
+	Integer getTotalCapacity() {
+		return totalCapacity;
 	}
 }
