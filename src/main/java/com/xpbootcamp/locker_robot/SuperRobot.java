@@ -15,6 +15,7 @@ public class SuperRobot {
 		for (Locker locker : lockers) {
 			float vacancyRate = locker.getAvailableCapacity().floatValue() / locker.getTotalCapacity();
 			if (vacancyRate >= maxVacancyRate) {
+				maxVacancyRate = vacancyRate;
 				lockerWithMaxVacancyRate = locker;
 			}
 		}
