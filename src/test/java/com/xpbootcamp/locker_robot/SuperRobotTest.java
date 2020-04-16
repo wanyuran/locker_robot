@@ -74,7 +74,7 @@ class SuperRobotTest {
 		RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> superRobot.saveBag(bag));
 
 		// Then
-		assertEquals("所有柜子已满", runtimeException.getMessage());
+		assertEquals("当前柜子已满", runtimeException.getMessage());
 	}
 
 	@Test
