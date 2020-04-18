@@ -42,7 +42,7 @@ public class Locker {
 		return availableCapacity;
 	}
 
-	Integer getTotalCapacity() {
-		return totalCapacity;
+	Double getVacancyRate() {
+		return (double) this.availableCapacity / this.totalCapacity;
 	}
 }
